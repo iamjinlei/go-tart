@@ -1,10 +1,10 @@
-<h1 align="center">go-tart (go-ta realtime)</h1>
+<h1 align="center">go-tart (go-TA RealTime)</h1>
 
 [go-talib](https://github.com/markcheno/go-talib) project provides a nice port of the python [TA-Lib](http://ta-lib.org/).
 But it lacks the capability to stream new updates into indicators.
 In some circumstance, re-computation of the full history could be costly.
-Thus the birth of go-tart (go-TA Realtime).
-The codebase is heavily influenced by [go-talib](https://github.com/markcheno/go-talib).
+[go-tart](https://github.com/iamjinlei/go-tart)'s goal is to alleviate the issue.
+The codebase, especially the test suite, is heavily influenced by [go-talib](https://github.com/markcheno/go-talib).
 Still a work-in-project!
 
 ## Install
