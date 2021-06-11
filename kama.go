@@ -46,8 +46,16 @@ func (k *Kama) Update(v float64) float64 {
 		return 0
 	}
 
-	// abs(Nth value - 1st value) / (sum of N period abs chg)
-	er := math.Abs(v-k.hist[nextIdx]) / k.sumAbsChg
+	// er = change / volatility
+	//    = abs(Nth value - 1st value) / (sum of N period abs chg)
+	totalChg := math.Abs(v - k.hist[nextIdx])
+	var er float64
+	if (totalChg >= k.sumAbsChg) || (k.sumAbsChg < 0.00000000000001 && k.sumAbsChg > -0.00000000000001) {
+		er = 1.0
+	} else {
+		er = totalChg / k.sumAbsChg
+	}
+
 	sc := er*k.constA + k.constB
 	sc *= sc
 
