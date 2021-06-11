@@ -2,6 +2,7 @@ package tart
 
 type MaType int
 
+// TODO: support Mama & T3
 const (
 	SMA MaType = iota
 	EMA
