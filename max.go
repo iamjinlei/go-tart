@@ -35,7 +35,7 @@ func (m *Max) Update(v float64) (int64, float64) {
 
 	m.sz++
 	if m.sz < m.n {
-		if m.sz == 0 || m.max < v {
+		if m.sz == 1 || m.max < v {
 			m.max = v
 			m.maxIdx = idx
 		}

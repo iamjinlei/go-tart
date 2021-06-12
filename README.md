@@ -3,9 +3,10 @@
 [go-talib](https://github.com/markcheno/go-talib) project provides a nice port of the python [TA-Lib](http://ta-lib.org/).
 But it lacks the capability to stream new updates into indicators.
 In some circumstance, re-computation of the full history could be costly.
-[go-tart](https://github.com/iamjinlei/go-tart)'s goal is to alleviate the issue.
-The codebase, especially the test suite, is heavily influenced by [go-talib](https://github.com/markcheno/go-talib).
-Still a work-in-progress!
+Its codebase is also a bit verbose hard to read.
+With those in mind, [go-tart](https://github.com/iamjinlei/go-tart)'s goal is to support streaming updates of new values with concise implementation.
+
+**Work-in-Progress**
 
 ## Install
 
