@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"reflect"
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -25,7 +27,46 @@ func a2s(a []float64) string {
 	return strings.Replace(fmt.Sprintf("%f", a), " ", ",", -1)
 }
 
-func compare(t *testing.T, talibCmd string, actual []float64) {
+// stealing from assert lib
+func toFloat(x interface{}) (float64, bool) {
+	var xf float64
+	xok := true
+
+	switch xn := x.(type) {
+	case uint8:
+		xf = float64(xn)
+	case uint16:
+		xf = float64(xn)
+	case uint32:
+		xf = float64(xn)
+	case uint64:
+		xf = float64(xn)
+	case int:
+		xf = float64(xn)
+	case int8:
+		xf = float64(xn)
+	case int16:
+		xf = float64(xn)
+	case int32:
+		xf = float64(xn)
+	case int64:
+		xf = float64(xn)
+	case float32:
+		xf = float64(xn)
+	case float64:
+		xf = float64(xn)
+	case time.Duration:
+		xf = float64(xn)
+	default:
+		xok = false
+	}
+
+	return xf, xok
+}
+
+func compare(t *testing.T, talibCmd string, actual interface{}) {
+	assert.True(t, actual != nil && reflect.TypeOf(actual).Kind() == reflect.Slice)
+
 	pyProg := fmt.Sprintf(`import talib,numpy
 testOpen = numpy.array(%s)
 testHigh = numpy.array(%s)
@@ -48,11 +89,14 @@ print(' '.join([str(p) for p in result]).replace('nan','0.0'))`,
 		}
 	}
 
-	assert.Equal(t, len(expected), len(actual))
+	actualSlice := reflect.ValueOf(actual)
+	assert.Equal(t, len(expected), actualSlice.Len())
 
 	pairs := []string{}
 	for i := 0; i < len(expected); i++ {
-		pairs = append(pairs, fmt.Sprintf("%.9f vs. %.9f", expected[i], actual[i]))
+		v, ok := toFloat(actualSlice.Index(i).Interface())
+		assert.True(t, ok)
+		pairs = append(pairs, fmt.Sprintf("%.9f (expected) vs. %.9f (actual)", expected[i], v))
 	}
 
 	assert.InDeltaSlicef(t, expected, actual, 1e-9, strings.Join(pairs, "\n"))
