@@ -1,40 +1,29 @@
 package tart
 
 type Atr struct {
-	n      int64
-	k1     float64
-	k2     float64
-	tr     *TRange
-	sz     int64
-	prevTr float64
+	n   int64
+	tr  *TRange
+	ema *Ema
+	sz  int64
 }
 
 func NewAtr(n int64) *Atr {
-	k := 1.0 / float64(n)
 	return &Atr{
-		n:  n,
-		k1: k,
-		k2: 1.0 - k,
-		tr: NewTRange(),
-		sz: 0,
+		n:   n,
+		tr:  NewTRange(),
+		ema: NewEma(n, 1.0/float64(n)),
+		sz:  0,
 	}
 }
 
 func (a *Atr) Update(h, l, c float64) float64 {
 	tr := a.tr.Update(h, l, c)
 	a.sz++
-
-	if a.sz <= a.n+1 {
-		a.prevTr += tr
-		if a.sz == a.n+1 {
-			a.prevTr /= float64(a.n)
-			return a.prevTr
-		}
+	if a.sz == 1 {
 		return 0
 	}
 
-	a.prevTr = tr*a.k1 + a.prevTr*a.k2
-	return a.prevTr
+	return a.ema.Update(tr)
 }
 
 func AtrArr(h, l, c []float64, n int64) []float64 {
