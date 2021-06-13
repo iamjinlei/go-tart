@@ -26,16 +26,10 @@ func (t *TRange) Update(h, l, c float64) float64 {
 		return 0
 	}
 
-	// math.Max() does some extra we don'tc care (overhead)
-	max := h - l
-	if max < d0 {
-		max = d0
-	}
-	if max < d1 {
-		max = d1
-	}
-
-	return max
+	ret := h - l
+	ret = max(ret, d0)
+	ret = max(ret, d1)
+	return ret
 }
 
 func TRangeArr(h, l, c []float64) []float64 {
