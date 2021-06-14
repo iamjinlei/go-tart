@@ -24,7 +24,7 @@ func (b *BBands) Update(v float64) (float64, float64, float64) {
 	return m + b.upNStdDev*stddev, m, m - b.upNStdDev*stddev
 }
 
-func BBandsArr(in []float64, t MaType, n int64, upNStdDev, dnNStdDev float64) ([]float64, []float64, []float64) {
+func BBandsArr(t MaType, in []float64, n int64, upNStdDev, dnNStdDev float64) ([]float64, []float64, []float64) {
 	m := make([]float64, len(in))
 	u := make([]float64, len(in))
 	l := make([]float64, len(in))
