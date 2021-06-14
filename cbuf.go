@@ -82,3 +82,11 @@ func (c *cBuf) max() (int64, float64) {
 	}
 	return maxIdx, max
 }
+
+func (c *cBuf) iter(fn func(v float64)) {
+	idx := c.oldest
+	for i := int64(0); i < c.n; i++ {
+		fn(c.hist[idx])
+		idx = (idx + 1) % c.n
+	}
+}

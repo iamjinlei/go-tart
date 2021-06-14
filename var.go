@@ -2,37 +2,32 @@ package tart
 
 type Var struct {
 	n    int64
-	sz   int64
-	hist []float64
+	hist *cBuf
 	sum  float64
 }
 
 func NewVar(n int64) *Var {
 	return &Var{
 		n:    n,
-		sz:   0,
-		hist: make([]float64, n),
+		hist: newCBuf(n),
 		sum:  0,
 	}
 }
 
 func (r *Var) Update(v float64) float64 {
-	idx := r.sz % r.n
-	r.sum += v - r.hist[idx]
-	r.hist[idx] = v
+	old := r.hist.append(v)
+	r.sum += v - old
 
-	r.sz++
-
-	if r.sz < r.n {
+	if r.hist.size() < r.n {
 		return 0
 	}
 
 	mean := r.sum / float64(r.n)
 	sum := float64(0)
-	for _, h := range r.hist {
-		diff := (h - mean)
+	r.hist.iter(func(v float64) {
+		diff := (v - mean)
 		sum += diff * diff
-	}
+	})
 
 	return sum / float64(r.n)
 }

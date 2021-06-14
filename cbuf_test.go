@@ -32,4 +32,10 @@ func TestCBuf(t *testing.T) {
 	assert.EqualValues(t, 6, c.indexToSeq(6))
 	assert.EqualValues(t, 7, c.indexToSeq(0))
 	assert.EqualValues(t, 8, c.indexToSeq(1))
+
+	sum := float64(0)
+	c.iter(func(v float64) {
+		sum += v
+	})
+	assert.EqualValues(t, 42, sum)
 }
