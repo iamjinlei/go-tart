@@ -3,7 +3,6 @@ package tart
 type Max struct {
 	n      int64
 	hist   *cBuf
-	sz     int64
 	max    float64
 	maxIdx int64
 }
@@ -12,7 +11,6 @@ func NewMax(n int64) *Max {
 	return &Max{
 		n:      n,
 		hist:   newCBuf(n),
-		sz:     0,
 		max:    0,
 		maxIdx: 0,
 	}

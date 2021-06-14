@@ -2,28 +2,23 @@ package tart
 
 type Sum struct {
 	n    int64
-	sz   int64
-	hist []float64
+	hist *cBuf
 	sum  float64
 }
 
 func NewSum(n int64) *Sum {
 	return &Sum{
 		n:    n,
-		sz:   0,
-		hist: make([]float64, n),
+		hist: newCBuf(n),
 		sum:  0,
 	}
 }
 
 func (s *Sum) Update(v float64) float64 {
-	idx := s.sz % s.n
-	s.sum += v - s.hist[idx]
-	s.hist[idx] = v
+	old := s.hist.append(v)
+	s.sum += v - old
 
-	s.sz++
-
-	if s.sz < s.n {
+	if s.hist.size() < s.n {
 		return 0
 	}
 

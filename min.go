@@ -3,7 +3,6 @@ package tart
 type Min struct {
 	n      int64
 	hist   *cBuf
-	sz     int64
 	min    float64
 	minIdx int64
 }
@@ -12,7 +11,6 @@ func NewMin(n int64) *Min {
 	return &Min{
 		n:      n,
 		hist:   newCBuf(n),
-		sz:     0,
 		min:    0,
 		minIdx: 0,
 	}
