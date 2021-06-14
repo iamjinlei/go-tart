@@ -1,15 +1,13 @@
 package tart
 
 type Trima struct {
-	n          int64
-	factor     float64
-	leftWidth  int64
-	rightWidth int64
-	sz         int64
-	hist       []float64
-	leftSum    float64
-	rightSum   float64
-	sum        float64
+	n         int64
+	factor    float64
+	leftWidth int64
+	hist      *cBuf
+	leftSum   float64
+	rightSum  float64
+	sum       float64
 }
 
 func NewTrima(n int64) *Trima {
@@ -22,35 +20,31 @@ func NewTrima(n int64) *Trima {
 	}
 
 	return &Trima{
-		n:          n,
-		factor:     factor,
-		leftWidth:  n - half,
-		rightWidth: half,
-		sz:         0,
-		hist:       make([]float64, n),
-		leftSum:    0,
-		rightSum:   0,
-		sum:        0,
+		n:         n,
+		factor:    factor,
+		leftWidth: n - half,
+		hist:      newCBuf(n),
+		leftSum:   0,
+		rightSum:  0,
+		sum:       0,
 	}
 }
 
 func (t *Trima) Update(v float64) float64 {
-	leftStart := t.sz % t.n
-	leftEnd := (leftStart + t.leftWidth - 1) % t.n
-	rightStart := (leftEnd + 1) % t.n
 	oldLeftSum := t.leftSum
 	oldRightSum := t.rightSum
-	t.leftSum += t.hist[rightStart] - t.hist[leftStart]
-	t.rightSum += v - t.hist[rightStart]
-	t.hist[leftStart] = v
-	t.sz++
+	old := t.hist.append(v)
+	mid := t.hist.nthOldest(t.leftWidth - 1)
+	t.leftSum += mid - old
+	t.rightSum += v - mid
 
-	if t.sz <= t.leftWidth {
-		t.sum += float64(t.sz) * v
+	sz := t.hist.size()
+	if sz <= t.leftWidth {
+		t.sum += float64(sz) * v
 		return 0
-	} else if t.sz <= t.n {
-		t.sum += float64(t.n-t.sz+1) * v
-		if t.sz < t.n {
+	} else if sz <= t.n {
+		t.sum += float64(t.n-sz+1) * v
+		if sz < t.n {
 			return 0
 		}
 	} else {
