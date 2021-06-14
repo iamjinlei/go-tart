@@ -96,7 +96,7 @@ print(' '.join([str(p) for p in result]).replace('nan','0.0'))`,
 	for i := 0; i < len(expected); i++ {
 		v, ok := toFloat(actualSlice.Index(i).Interface())
 		assert.True(t, ok)
-		pairs = append(pairs, fmt.Sprintf("%.9f (expected) vs. %.9f (actual)", expected[i], v))
+		pairs = append(pairs, fmt.Sprintf("[%v] %.9f (expected) vs. %.9f (actual)", i, expected[i], v))
 	}
 
 	assert.InDeltaSlicef(t, expected, actual, 1e-9, strings.Join(pairs, "\n"))
