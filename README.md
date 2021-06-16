@@ -1,6 +1,6 @@
 <h1 align="center">go-tart (go-TA RealTime)</h1>
 
-[go-talib](https://github.com/markcheno/go-talib) project provides a nice port of the python [TA-Lib](http://ta-lib.org/).
+[go-talib](https://github.com/markcheno/go-talib) project provides a nice port of the C-implementation [TA-Lib](http://ta-lib.org/).
 However, its code is very verbose and hard to read due to the straight translation from the "C" code of [TA-Lib](http://ta-lib.org/).
 More often, streaming incremental updates to indicators is more desirable.
 We don't want to recalculate the full result if the sliding window only moves forward a single value while history values are not changed at all.
