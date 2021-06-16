@@ -65,6 +65,10 @@ func toFloat(x interface{}) (float64, bool) {
 }
 
 func compare(t *testing.T, talibCmd string, actual interface{}) {
+	compareWithError(t, talibCmd, actual, 1e-9)
+}
+
+func compareWithError(t *testing.T, talibCmd string, actual interface{}, allowance float64) {
 	assert.True(t, actual != nil && reflect.TypeOf(actual).Kind() == reflect.Slice)
 
 	pyProg := fmt.Sprintf(`import talib,numpy
@@ -99,7 +103,7 @@ print(' '.join([str(p) for p in result]).replace('nan','0.0'))`,
 		pairs = append(pairs, fmt.Sprintf("[%v] %.9f (expected) vs. %.9f (actual)", i, expected[i], v))
 	}
 
-	assert.InDeltaSlicef(t, expected, actual, 1e-9, strings.Join(pairs, "\n"))
+	assert.InDeltaSlicef(t, expected, actual, allowance, strings.Join(pairs, "\n"))
 }
 
 func TestMain(m *testing.M) {
