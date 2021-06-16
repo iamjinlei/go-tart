@@ -2,10 +2,11 @@ language: go
 
 go:
     - 1.13.x
+    - master
 
 before_script:
     - sudo apt install python2.7
     - pushd ~ && mkdir tmp && cd tmp && wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && sudo tar -xzf ta-lib-0.4.0-src.tar.gz && sudo rm ta-lib-0.4.0-src.tar.gz && cd ta-lib/ && sudo ./configure --prefix=/usr  && sudo make && sudo make install && cd ~ && sudo rm -rf ta-lib/ && pip install ta-lib && popd
 
 script:
-    - ls -a && GO111MODULE=on go test -v ./...
+    - GO111MODULE=on go test -v ./...
