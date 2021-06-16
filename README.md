@@ -1,9 +1,11 @@
+<h1 align="center">go-tart (go-TA RealTime)</h1>
+
 [![Build Status](https://travis-ci.com/iamjinlei/go-tart.svg?branch=master)](https://travis-ci.com/iamjinlei/go-tart)
 [![Go Report Card](https://goreportcard.com/badge/github.com/iamjinlei/go-tart)](https://goreportcard.com/report/github.com/iamjinlei/go-tart)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Reference](https://pkg.go.dev/badge/github.com/iamjinlei/go-tart.svg)](https://pkg.go.dev/github.com/iamjinlei/go-tart)
 
-<h1 align="center">go-tart (go-TA RealTime)</h1>
+## Intro
 
 [go-talib](https://github.com/markcheno/go-talib) project provides a nice port of the C-implementation [TA-Lib](http://ta-lib.org/).
 However, its code is very verbose and hard to read due to the straight translation from the "C" code of [TA-Lib](http://ta-lib.org/).
@@ -16,6 +18,7 @@ Results are verified using [TA-Lib](http://ta-lib.org/)'s output.
 MACD's "stability" issue from [go-talib](https://github.com/markcheno/go-talib) is fixed.
 
 ## Performance
+
 A benchmark is written to compare the performance for the set of indicators from both [go-talib](https://github.com/markcheno/go-talib) and [go-talib](https://github.com/markcheno/go-talib).
 This is not a scientific evaluation but gives a sense of how they perform in case of a full recalculation.
 As shown below, [go-tart](https://github.com/iamjinlei/go-tart) is about 3X slower in full recalculation, which is due to function call to *Update* in each iteration.
