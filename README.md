@@ -1,9 +1,7 @@
-<p align="center">
 [![Build Status](https://travis-ci.com/iamjinlei/go-tart.svg?branch=master)](https://travis-ci.com/iamjinlei/go-tart)
 [![Go Report Card](https://goreportcard.com/badge/github.com/iamjinlei/go-tart)](https://goreportcard.com/report/github.com/iamjinlei/go-tart)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Reference](https://pkg.go.dev/badge/github.com/iamjinlei/go-tart.svg)](https://pkg.go.dev/github.com/iamjinlei/go-tart)
-</p>
 
 <h1 align="center">go-tart (go-TA RealTime)</h1>
 
