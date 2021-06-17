@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-// Refert o ADX.
+// Refer to ADX.
 //  https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx
 type Dx struct {
 	n        int64
@@ -73,7 +73,7 @@ func (d *Dx) InitPeriod() int64 {
 	return d.n
 }
 
-// Refert o ADX.
+// Refer to ADX.
 //  https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx
 func DxArr(h, l, c []float64, n int64) []float64 {
 	out := make([]float64, len(c))
