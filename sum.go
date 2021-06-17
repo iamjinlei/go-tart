@@ -1,5 +1,6 @@
 package tart
 
+// Sum of the last N values.
 type Sum struct {
 	n    int64
 	hist *cBuf

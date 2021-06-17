@@ -1,5 +1,15 @@
 package tart
 
+// A simple moving average is formed by computing the average price of a security
+// over a specific number of periods. Most moving averages are based on closing
+// prices; for example, a 5-day simple moving average is the five-day sum of closing
+// prices divided by five. As its name implies, a moving average is an average that
+// moves. Old data is dropped as new data becomes available, causing the average
+// to move along the time scale. The example below shows a 5-day moving average
+// evolving over three days.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:moving_averages
+//  https://www.investopedia.com/terms/s/sma.asp
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/sma
 type Sma struct {
 	n    int64
 	hist *cBuf
@@ -28,6 +38,16 @@ func (s *Sma) Update(v float64) float64 {
 	return s.sum / float64(s.n)
 }
 
+// A simple moving average is formed by computing the average price of a security
+// over a specific number of periods. Most moving averages are based on closing
+// prices; for example, a 5-day simple moving average is the five-day sum of closing
+// prices divided by five. As its name implies, a moving average is an average that
+// moves. Old data is dropped as new data becomes available, causing the average
+// to move along the time scale. The example below shows a 5-day moving average
+// evolving over three days.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:moving_averages
+//  https://www.investopedia.com/terms/s/sma.asp
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/sma
 func SmaArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 

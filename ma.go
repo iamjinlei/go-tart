@@ -13,10 +13,7 @@ const (
 	KAMA
 )
 
-type maUpdater interface {
-	Update(v float64) float64
-}
-
+// Convenient wrapper for different moving average types
 type Ma struct {
 	mu maUpdater
 }
@@ -52,6 +49,7 @@ func (m *Ma) Update(v float64) float64 {
 	return m.mu.Update(v)
 }
 
+// Convenient wrapper for different moving average types
 func MaArr(t MaType, in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 
@@ -61,4 +59,8 @@ func MaArr(t MaType, in []float64, n int64) []float64 {
 	}
 
 	return out
+}
+
+type maUpdater interface {
+	Update(v float64) float64
 }

@@ -1,5 +1,18 @@
 package tart
 
+// The Percentage Price Oscillator (PPO) is a momentum oscillator
+// that measures the difference between two moving averages as a
+// percentage of the larger moving average. As with its cousin,
+// MACD, the Percentage Price Oscillator is shown with a signal line,
+// a histogram and a centerline. Signals are generated with signal
+// line crossovers, centerline crossovers, and divergences. These
+// signals are no different than those associated with MACD, with a
+// few differences between the two: first, PPO readings are not
+// subject to the price level of the security. Second, PPO readings
+// for different securities can be compared, even when there are
+// large differences in the price.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:price_oscillators_ppo
+//  https://www.investopedia.com/terms/p/ppo.asp
 type Ppo struct {
 	fastN int64
 	slowN int64
@@ -36,6 +49,19 @@ func (p *Ppo) Update(v float64) float64 {
 	return (fast - slow) / slow * 100.0
 }
 
+// The Percentage Price Oscillator (PPO) is a momentum oscillator
+// that measures the difference between two moving averages as a
+// percentage of the larger moving average. As with its cousin,
+// MACD, the Percentage Price Oscillator is shown with a signal line,
+// a histogram and a centerline. Signals are generated with signal
+// line crossovers, centerline crossovers, and divergences. These
+// signals are no different than those associated with MACD, with a
+// few differences between the two: first, PPO readings are not
+// subject to the price level of the security. Second, PPO readings
+// for different securities can be compared, even when there are
+// large differences in the price.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:price_oscillators_ppo
+//  https://www.investopedia.com/terms/p/ppo.asp
 func PpoArr(in []float64, t MaType, fastN, slowN int64) []float64 {
 	out := make([]float64, len(in))
 

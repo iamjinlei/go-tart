@@ -4,6 +4,16 @@ import (
 	"math"
 )
 
+// Developed by Perry Kaufman, Kaufman's Adaptive Moving
+// Average (KAMA) is a moving average designed to account
+// for market noise or volatility. KAMA will closely follow
+// prices when the price swings are relatively small and
+// the noise is low. KAMA will adjust when the price swings
+// widen and follow prices from a greater distance. This
+// trend-following indicator can be used to identify the
+// overall trend, time turning points and filter price
+// movements.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:kaufman_s_adaptive_moving_average
 type Kama struct {
 	n          int64
 	constA     float64
@@ -63,6 +73,16 @@ func (k *Kama) Update(v float64) float64 {
 	return k.kama
 }
 
+// Developed by Perry Kaufman, Kaufman's Adaptive Moving
+// Average (KAMA) is a moving average designed to account
+// for market noise or volatility. KAMA will closely follow
+// prices when the price swings are relatively small and
+// the noise is low. KAMA will adjust when the price swings
+// widen and follow prices from a greater distance. This
+// trend-following indicator can be used to identify the
+// overall trend, time turning points and filter price
+// movements.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:kaufman_s_adaptive_moving_average
 func KamaArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 

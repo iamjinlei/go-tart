@@ -1,5 +1,14 @@
 package tart
 
+// Exponential moving averages (EMAs) reduce the lag by
+// applying more weight to recent prices. The weighting
+// applied to the most recent price depends on the number
+// of periods in the moving average. EMAs differ from
+// simple moving averages in that a given day's EMA
+// calculation depends on the EMA calculations for all
+// the days prior to that day. You need far more than 10
+// days of data to calculate a reasonably accurate 10-day EMA.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:moving_averages
 type Ema struct {
 	n  int64
 	k1 float64
@@ -32,6 +41,15 @@ func (e *Ema) Update(v float64) float64 {
 	return e.ma
 }
 
+// Exponential moving averages (EMAs) reduce the lag by
+// applying more weight to recent prices. The weighting
+// applied to the most recent price depends on the number
+// of periods in the moving average. EMAs differ from
+// simple moving averages in that a given day's EMA
+// calculation depends on the EMA calculations for all
+// the days prior to that day. You need far more than 10
+// days of data to calculate a reasonably accurate 10-day EMA.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:moving_averages
 func EmaArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 

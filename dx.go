@@ -4,34 +4,8 @@ import (
 	"math"
 )
 
-type smooth struct {
-	n  int64
-	k  float64
-	sz int64
-	sm float64
-}
-
-func newSmooth(n int64) *smooth {
-	return &smooth{
-		n:  n,
-		k:  float64(n-1) / float64(n),
-		sz: 0,
-		sm: 0,
-	}
-}
-
-func (s *smooth) update(v float64) float64 {
-	s.sz++
-	if s.sz < s.n {
-		s.sm += v
-		return 0
-	} else {
-		s.sm = s.sm*s.k + v
-	}
-
-	return s.sm
-}
-
+// Refert o ADX.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx
 type Dx struct {
 	n        int64
 	prevH    float64
@@ -95,6 +69,8 @@ func (d *Dx) Update(h, l, c float64) float64 {
 	return dx
 }
 
+// Refert o ADX.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx
 func DxArr(h, l, c []float64, n int64) []float64 {
 	out := make([]float64, len(c))
 
@@ -104,4 +80,32 @@ func DxArr(h, l, c []float64, n int64) []float64 {
 	}
 
 	return out
+}
+
+type smooth struct {
+	n  int64
+	k  float64
+	sz int64
+	sm float64
+}
+
+func newSmooth(n int64) *smooth {
+	return &smooth{
+		n:  n,
+		k:  float64(n-1) / float64(n),
+		sz: 0,
+		sm: 0,
+	}
+}
+
+func (s *smooth) update(v float64) float64 {
+	s.sz++
+	if s.sz < s.n {
+		s.sm += v
+		return 0
+	} else {
+		s.sm = s.sm*s.k + v
+	}
+
+	return s.sm
 }

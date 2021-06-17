@@ -1,5 +1,8 @@
 package tart
 
+// Refer to MACD.
+// This is a general version of MACD with moving average types
+// for fast, slow, and signal lines as paremters.
 type MacdExt struct {
 	fastN   int64
 	slowN   int64
@@ -52,6 +55,9 @@ func (m *MacdExt) Update(v float64) (float64, float64, float64) {
 	return macd, sig, macd - sig
 }
 
+// Refer to MACD.
+// This is a general version of MACD with moving average types
+// for fast, slow, and signal lines as paremters.
 func MacdExtArr(in []float64, fastT MaType, fastN int64, slowT MaType, slowN int64, signalT MaType, signalN int64) ([]float64, []float64, []float64) {
 	macd := make([]float64, len(in))
 	signal := make([]float64, len(in))

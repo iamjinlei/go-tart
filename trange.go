@@ -4,6 +4,12 @@ import (
 	"math"
 )
 
+// Welles Wilder described these calculations to determine the trading range
+// for a stock or commodity. True Range is defined as the largest of the
+// following: (1) The distance from today's high to today's low. (2) The
+// distance from yesterday's close to today's high. (3) The distance from
+// yesterday's close to today's low. Wilder included price comparisons among
+// subsequent bars in order to account for gaps in his range calculation.
 type TRange struct {
 	sz    int64
 	prevC float64
@@ -32,6 +38,12 @@ func (t *TRange) Update(h, l, c float64) float64 {
 	return ret
 }
 
+// Welles Wilder described these calculations to determine the trading range
+// for a stock or commodity. True Range is defined as the largest of the
+// following: (1) The distance from today's high to today's low. (2) The
+// distance from yesterday's close to today's high. (3) The distance from
+// yesterday's close to today's low. Wilder included price comparisons among
+// subsequent bars in order to account for gaps in his range calculation.
 func TRangeArr(h, l, c []float64) []float64 {
 	out := make([]float64, len(c))
 

@@ -1,5 +1,8 @@
 package tart
 
+// Average Directional Movement Index Rating (ADXR) is a simple
+// average of today’s ADX value and the ADX from N periods ago.
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/dmi
 type AdxR struct {
 	n    int64
 	adx  *Adx
@@ -25,6 +28,9 @@ func (a *AdxR) Update(h, l, c float64) float64 {
 	return (old + v) / 2.0
 }
 
+// Average Directional Movement Index Rating (ADXR) is a simple
+// average of today’s ADX value and the ADX from N periods ago.
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/dmi
 func AdxRArr(h, l, c []float64, n int64) []float64 {
 	out := make([]float64, len(c))
 

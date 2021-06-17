@@ -1,5 +1,12 @@
 package tart
 
+// The Slow Stochastic Oscillator is a momentum indicator that shows the location
+// of the close relative to the high-low range over a set number of periods. The
+// indicator can range from 0 to 100. The difference between the Slow and Fast
+// Stochastic Oscillator is the Slow %K incorporates a %K slowing period of 3 that
+// controls the internal smoothing of %K. Setting the smoothing period to 1 is
+// equivalent to plotting the Fast Stochastic Oscillator.
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/slow-stochastic
 type StochSlow struct {
 	fastKN int64
 	slowKN int64
@@ -41,6 +48,13 @@ func (s *StochSlow) Update(h, l, c float64) (float64, float64) {
 	return slowK, slowD
 }
 
+// The Slow Stochastic Oscillator is a momentum indicator that shows the location
+// of the close relative to the high-low range over a set number of periods. The
+// indicator can range from 0 to 100. The difference between the Slow and Fast
+// Stochastic Oscillator is the Slow %K incorporates a %K slowing period of 3 that
+// controls the internal smoothing of %K. Setting the smoothing period to 1 is
+// equivalent to plotting the Fast Stochastic Oscillator.
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/slow-stochastic
 func StochSlowArr(h, l, c []float64, fastKN int64, kt MaType, slowKN int64, dt MaType, slowDN int64) ([]float64, []float64) {
 	k := make([]float64, len(c))
 	d := make([]float64, len(c))

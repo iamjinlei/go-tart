@@ -1,5 +1,8 @@
 package tart
 
+// Normalized Average True Range (NATR) attempts to normalize
+// the average true range values across instruments by using
+// the closing price.
 type Natr struct {
 	n   int64
 	atr *Atr
@@ -20,6 +23,9 @@ func (a *Natr) Update(h, l, c float64) float64 {
 	return tr / c * 100.0
 }
 
+// Normalized Average True Range (NATR) attempts to normalize
+// the average true range values across instruments by using
+// the closing price.
 func NatrArr(h, l, c []float64, n int64) []float64 {
 	out := make([]float64, len(c))
 

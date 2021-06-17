@@ -1,5 +1,17 @@
 package tart
 
+// Balance of Power (BOP) is an oscillator that measures the
+// strength of buying and selling pressure. Introduced by Igor
+// Levshin in the August 2001 issue of Technical Analysis of
+// Stocks & Commodities magazine, this indicator compares the
+// power of buyers to push prices to higher extremes with the
+// power of sellers to move prices to lower extremes. When the
+// indicator is in positive territory, the bulls are in charge;
+// and sellers dominate when the indicator is negative. A reading
+// near the zero line indicates a balance between the two and
+// can mean a trend reversal.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:balance_of_power
+//  https://www.investopedia.com/terms/b/bop.asp
 type Bop struct {
 }
 
@@ -15,6 +27,18 @@ func (b *Bop) Update(o, h, l, c float64) float64 {
 	return (c - o) / d
 }
 
+// Balance of Power (BOP) is an oscillator that measures the
+// strength of buying and selling pressure. Introduced by Igor
+// Levshin in the August 2001 issue of Technical Analysis of
+// Stocks & Commodities magazine, this indicator compares the
+// power of buyers to push prices to higher extremes with the
+// power of sellers to move prices to lower extremes. When the
+// indicator is in positive territory, the bulls are in charge;
+// and sellers dominate when the indicator is negative. A reading
+// near the zero line indicates a balance between the two and
+// can mean a trend reversal.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:balance_of_power
+//  https://www.investopedia.com/terms/b/bop.asp
 func BopArr(o, h, l, c []float64) []float64 {
 	out := make([]float64, len(o))
 

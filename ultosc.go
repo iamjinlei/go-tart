@@ -4,6 +4,19 @@ import (
 	"sort"
 )
 
+// Developed by Larry Williams in 1976 and featured in Stocks & Commodities
+// Magazine in 1985, the Ultimate Oscillator is a momentum oscillator designed
+// to capture momentum across three different timeframes. The multiple timeframe
+// objective seeks to avoid the pitfalls of other oscillators. Many momentum
+// oscillators surge at the beginning of a strong advance, only to form a bearish
+// divergence as the advance continues. This is because they are stuck with one
+// timeframe. The Ultimate Oscillator attempts to correct this fault by
+// incorporating longer timeframes into the basic formula. Williams identified
+// a buy signal a based on a bullish divergence and a sell signal based on a
+// bearish divergence.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:ultimate_oscillator
+//  https://www.investopedia.com/terms/u/ultimateoscillator.asp
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/ultimate-oscillator
 type UltOsc struct {
 	n1    int64
 	n2    int64
@@ -69,6 +82,19 @@ func (u *UltOsc) Update(h, l, c float64) float64 {
 	return (d1*4.0 + d2*2.0 + d3) / 7.0 * 100.0
 }
 
+// Developed by Larry Williams in 1976 and featured in Stocks & Commodities
+// Magazine in 1985, the Ultimate Oscillator is a momentum oscillator designed
+// to capture momentum across three different timeframes. The multiple timeframe
+// objective seeks to avoid the pitfalls of other oscillators. Many momentum
+// oscillators surge at the beginning of a strong advance, only to form a bearish
+// divergence as the advance continues. This is because they are stuck with one
+// timeframe. The Ultimate Oscillator attempts to correct this fault by
+// incorporating longer timeframes into the basic formula. Williams identified
+// a buy signal a based on a bullish divergence and a sell signal based on a
+// bearish divergence.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:ultimate_oscillator
+//  https://www.investopedia.com/terms/u/ultimateoscillator.asp
+//  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/ultimate-oscillator
 func UltOscArr(h, l, c []float64, n1, n2, n3 int64) []float64 {
 	out := make([]float64, len(c))
 

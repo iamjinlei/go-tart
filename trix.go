@@ -1,5 +1,16 @@
 package tart
 
+// TRIX is a momentum oscillator that displays the percent rate of change of
+// a triple exponentially smoothed moving average. It was developed in the
+// early 1980's by Jack Hutson, an editor for Technical Analysis of Stocks
+// and Commodities magazine. With its triple smoothing, TRIX is designed to
+// filter out insignificant price movements. Chartists can use TRIX to
+// generate signals similar to MACD. A signal line can be applied to look
+// for signal line crossovers. A directional bias can be determined with the
+// absolute level. Bullish and bearish divergences can be used to anticipate
+// reversals.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:trix
+//  https://www.investopedia.com/terms/t/trix.asp
 type Trix struct {
 	n    int64
 	ema1 *Ema
@@ -46,6 +57,17 @@ func (t *Trix) Update(v float64) float64 {
 	return roc * 100.0
 }
 
+// TRIX is a momentum oscillator that displays the percent rate of change of
+// a triple exponentially smoothed moving average. It was developed in the
+// early 1980's by Jack Hutson, an editor for Technical Analysis of Stocks
+// and Commodities magazine. With its triple smoothing, TRIX is designed to
+// filter out insignificant price movements. Chartists can use TRIX to
+// generate signals similar to MACD. A signal line can be applied to look
+// for signal line crossovers. A directional bias can be determined with the
+// absolute level. Bullish and bearish divergences can be used to anticipate
+// reversals.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:trix
+//  https://www.investopedia.com/terms/t/trix.asp
 func TrixArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 

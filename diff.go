@@ -1,5 +1,12 @@
 package tart
 
+// This is also known as Momentum (MOM).
+// The Momentum (MOM) indicator compares the current price with
+// the previous price from a selected number of periods ago.
+// This indicator is similar to the “Rate of Change” indicator,
+// but the MOM does not normalize the price, so different
+// instruments can have different indicator values based on
+// their point values.
 type Diff struct {
 	n    int64
 	hist *cBuf
@@ -25,6 +32,13 @@ func (d *Diff) Update(v float64) float64 {
 	return v - old
 }
 
+// This is also known as Momentum (MOM).
+// The Momentum (MOM) indicator compares the current price with
+// the previous price from a selected number of periods ago.
+// This indicator is similar to the “Rate of Change” indicator,
+// but the MOM does not normalize the price, so different
+// instruments can have different indicator values based on
+// their point values.
 func DiffArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 

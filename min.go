@@ -1,5 +1,6 @@
 package tart
 
+// Min value of the selected period.
 type Min struct {
 	n      int64
 	hist   *cBuf
@@ -34,6 +35,7 @@ func (m *Min) Update(v float64) (int64, float64) {
 	return m.hist.indexToSeq(m.minIdx), m.min
 }
 
+// Min value of the selected period.
 func MinArr(in []float64, n int64) ([]int64, []float64) {
 	outIdx := make([]int64, len(in))
 	out := make([]float64, len(in))

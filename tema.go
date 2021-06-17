@@ -1,5 +1,17 @@
 package tart
 
+// The Triple Exponential Moving Average (TEMA) reduces the lag of traditional
+// EMAs, making it more responsive and better-suited for short-term trading.
+// Shortly after developing the Double Exponential Moving Average (DEMA) in 1994,
+// Patrick Mulloy took the concept a step further and created the Triple
+// Exponential Moving Average (TEMA). Like its predecessor DEMA, the TEMA overlay
+// uses the lag difference between different EMAs to adjust a traditional EMA.
+// However, TEMA's formula uses a triple-smoothed EMA in addition to the single-
+// and double-smoothed EMAs employed in the formula for DEMA. The offset created
+// using these three EMAs produces a moving average that stays even closer to the
+// price bars than DEMA.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:tema
+//  https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp
 type Tema struct {
 	n    int64
 	sz   int64
@@ -37,6 +49,18 @@ func (t *Tema) Update(v float64) float64 {
 	return 0
 }
 
+// The Triple Exponential Moving Average (TEMA) reduces the lag of traditional
+// EMAs, making it more responsive and better-suited for short-term trading.
+// Shortly after developing the Double Exponential Moving Average (DEMA) in 1994,
+// Patrick Mulloy took the concept a step further and created the Triple
+// Exponential Moving Average (TEMA). Like its predecessor DEMA, the TEMA overlay
+// uses the lag difference between different EMAs to adjust a traditional EMA.
+// However, TEMA's formula uses a triple-smoothed EMA in addition to the single-
+// and double-smoothed EMAs employed in the formula for DEMA. The offset created
+// using these three EMAs produces a moving average that stays even closer to the
+// price bars than DEMA.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:tema
+//  https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp
 func TemaArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 

@@ -1,5 +1,6 @@
 package tart
 
+// Max value of the selected period.
 type Max struct {
 	n      int64
 	hist   *cBuf
@@ -34,6 +35,7 @@ func (m *Max) Update(v float64) (int64, float64) {
 	return m.hist.indexToSeq(m.maxIdx), m.max
 }
 
+// Max value of the selected period.
 func MaxArr(in []float64, n int64) ([]int64, []float64) {
 	outIdx := make([]int64, len(in))
 	out := make([]float64, len(in))

@@ -1,5 +1,17 @@
 package tart
 
+// The Double Exponential Moving Average (DEMA) reduces the lag
+// of traditional EMAs, making it more responsive and better-suited
+// for short-term traders. DEMA was developed by Patrick Mulloy,
+// and introduced in the January 1994 issue of Technical Analysis
+// of Stocks & Commodities magazine. The overlay uses the lag
+// difference between a single-smoothed EMA and a double-smoothed
+// EMA to offset the single-smoothed EMA. This offset produces a
+// moving average that remains smooth, but stays closer to the
+// price bars than either the single- or double-smoothed
+// traditional EMA.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:dema
+//  https://www.investopedia.com/terms/d/double-exponential-moving-average.asp
 type Dema struct {
 	n    int64
 	sz   int64
@@ -30,6 +42,18 @@ func (d *Dema) Update(v float64) float64 {
 	return 0
 }
 
+// The Double Exponential Moving Average (DEMA) reduces the lag
+// of traditional EMAs, making it more responsive and better-suited
+// for short-term traders. DEMA was developed by Patrick Mulloy,
+// and introduced in the January 1994 issue of Technical Analysis
+// of Stocks & Commodities magazine. The overlay uses the lag
+// difference between a single-smoothed EMA and a double-smoothed
+// EMA to offset the single-smoothed EMA. This offset produces a
+// moving average that remains smooth, but stays closer to the
+// price bars than either the single- or double-smoothed
+// traditional EMA.
+//  https://school.stockcharts.com/doku.php?id=technical_indicators:dema
+//  https://www.investopedia.com/terms/d/double-exponential-moving-average.asp
 func DemaArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 
