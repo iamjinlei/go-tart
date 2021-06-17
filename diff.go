@@ -22,14 +22,18 @@ func NewDiff(n int64) *Diff {
 }
 
 func (d *Diff) Update(v float64) float64 {
+	d.sz++
 	old := d.hist.append(v)
 
-	d.sz++
 	if d.sz <= d.n {
 		return 0
 	}
 
 	return v - old
+}
+
+func (d *Diff) InitPeriod() int64 {
+	return d.n
 }
 
 // This is also known as Momentum (MOM).

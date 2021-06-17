@@ -38,6 +38,10 @@ func (s *Sma) Update(v float64) float64 {
 	return s.sum / float64(s.n)
 }
 
+func (s *Sma) InitPeriod() int64 {
+	return s.n - 1
+}
+
 // A simple moving average is formed by computing the average price of a security
 // over a specific number of periods. Most moving averages are based on closing
 // prices; for example, a 5-day simple moving average is the five-day sum of closing

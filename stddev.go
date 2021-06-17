@@ -30,6 +30,10 @@ func (s *StdDev) Update(v float64) float64 {
 	return math.Sqrt(v)
 }
 
+func (s *StdDev) InitPeriod() int64 {
+	return s.v.InitPeriod()
+}
+
 // Standard deviation is a statistical term that measures the amount of
 // variability or dispersion around an average. Standard deviation is also
 // a measure of volatility. Generally speaking, dispersion is the difference

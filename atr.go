@@ -47,6 +47,10 @@ func (a *Atr) Update(h, l, c float64) float64 {
 	return a.ema.Update(tr)
 }
 
+func (a *Atr) InitPeriod() int64 {
+	return 1
+}
+
 // Developed by J. Welles Wilder, the Average True Range (ATR)
 // is an indicator that measures volatility. As with most of
 // his indicators, Wilder designed ATR with commodities and

@@ -31,8 +31,9 @@ func NewMacdExt(fastT MaType, fastN int64, slowT MaType, slowN int64, signalT Ma
 }
 
 func (m *MacdExt) Update(v float64) (float64, float64, float64) {
-	slow := m.slow.Update(v)
 	m.sz++
+	slow := m.slow.Update(v)
+
 	if m.sz <= m.slowN-m.fastN {
 		// align the first valid result for fast & slow EMA
 		return 0, 0, 0
@@ -53,6 +54,10 @@ func (m *MacdExt) Update(v float64) (float64, float64, float64) {
 	}
 
 	return macd, sig, macd - sig
+}
+
+func (m *MacdExt) InitPeriod() int64 {
+	return m.n - 1
 }
 
 // Refer to MACD.

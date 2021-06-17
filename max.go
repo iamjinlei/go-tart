@@ -35,6 +35,10 @@ func (m *Max) Update(v float64) (int64, float64) {
 	return m.hist.indexToSeq(m.maxIdx), m.max
 }
 
+func (m *Max) InitPeriod() int64 {
+	return m.n - 1
+}
+
 // Max value of the selected period.
 func MaxArr(in []float64, n int64) ([]int64, []float64) {
 	outIdx := make([]int64, len(in))

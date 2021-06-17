@@ -73,6 +73,10 @@ func (k *Kama) Update(v float64) float64 {
 	return k.kama
 }
 
+func (k *Kama) InitPeriod() int64 {
+	return k.n
+}
+
 // Developed by Perry Kaufman, Kaufman's Adaptive Moving
 // Average (KAMA) is a moving average designed to account
 // for market noise or volatility. KAMA will closely follow

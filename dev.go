@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+// Average deviation from mean value.
 type Dev struct {
 	n    int64
 	hist *cBuf
@@ -33,6 +34,10 @@ func (d *Dev) Update(v float64) float64 {
 	})
 
 	return sum / float64(d.n)
+}
+
+func (d *Dev) InitPeriod() int64 {
+	return d.n - 1
 }
 
 func VarDev(in []float64, n int64) []float64 {

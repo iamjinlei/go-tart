@@ -43,6 +43,10 @@ func (r *Roc) Update(v float64) float64 {
 	return (v - old) / old * 100.0
 }
 
+func (r *Roc) InitPeriod() int64 {
+	return r.n
+}
+
 // The Rate-of-Change (ROC) indicator, which is also referred to as simply
 // Momentum, is a pure momentum oscillator that measures the percent change
 // in price from one period to the next. The ROC calculation compares the

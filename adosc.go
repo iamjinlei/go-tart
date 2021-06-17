@@ -63,6 +63,10 @@ func (a *AdOsc) Update(h, l, c, v float64) float64 {
 	return a.fast - a.slow
 }
 
+func (a *AdOsc) InitPeriod() int64 {
+	return a.slowN - 1
+}
+
 // Developed by Marc Chaikin, the Chaikin Oscillator measures the
 // momentum of the Accumulation Distribution Line using the MACD
 // formula. (This makes it an indicator of an indicator.) The

@@ -28,6 +28,10 @@ func (a *AdxR) Update(h, l, c float64) float64 {
 	return (old + v) / 2.0
 }
 
+func (a *AdxR) InitPeriod() int64 {
+	return 3*a.n - 2
+}
+
 // Average Directional Movement Index Rating (ADXR) is a simple
 // average of today’s ADX value and the ADX from N periods ago.
 //  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/dmi

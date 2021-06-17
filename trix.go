@@ -57,6 +57,10 @@ func (t *Trix) Update(v float64) float64 {
 	return roc * 100.0
 }
 
+func (t *Trix) InitPeriod() int64 {
+	return 3*t.n - 3
+}
+
 // TRIX is a momentum oscillator that displays the percent rate of change of
 // a triple exponentially smoothed moving average. It was developed in the
 // early 1980's by Jack Hutson, an editor for Technical Analysis of Stocks

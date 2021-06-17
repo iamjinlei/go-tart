@@ -38,6 +38,10 @@ func (t *TRange) Update(h, l, c float64) float64 {
 	return ret
 }
 
+func (t *TRange) InitPeriod() int64 {
+	return 1
+}
+
 // Welles Wilder described these calculations to determine the trading range
 // for a stock or commodity. True Range is defined as the largest of the
 // following: (1) The distance from today's high to today's low. (2) The

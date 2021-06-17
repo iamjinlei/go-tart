@@ -29,8 +29,8 @@ func NewDema(n int64, k float64) *Dema {
 }
 
 func (d *Dema) Update(v float64) float64 {
-	e1 := d.ema1.Update(v)
 	d.sz++
+	e1 := d.ema1.Update(v)
 
 	if d.sz > d.n-1 {
 		e2 := d.ema2.Update(e1)
@@ -40,6 +40,10 @@ func (d *Dema) Update(v float64) float64 {
 	}
 
 	return 0
+}
+
+func (d *Dema) InitPeriod() int64 {
+	return d.n*2 - 2
 }
 
 // The Double Exponential Moving Average (DEMA) reduces the lag

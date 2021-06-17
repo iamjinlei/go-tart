@@ -16,18 +16,27 @@ package tart
 //  https://www.investopedia.com/terms/b/bollingerbands.asp
 //  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/bollinger-bands
 type BBands struct {
-	ma        *Ma
-	stdDev    *StdDev
-	upNStdDev float64
-	dnNStdDev float64
+	initPeriod int64
+	ma         *Ma
+	stdDev     *StdDev
+	upNStdDev  float64
+	dnNStdDev  float64
 }
 
 func NewBBands(t MaType, n int64, upNStdDev, dnNStdDev float64) *BBands {
+	ma := NewMa(t, n)
+	stdDev := NewStdDev(n)
+	a := ma.InitPeriod()
+	b := stdDev.InitPeriod()
+	if a < b {
+		a = b
+	}
 	return &BBands{
-		ma:        NewMa(t, n),
-		stdDev:    NewStdDev(n),
-		upNStdDev: upNStdDev,
-		dnNStdDev: dnNStdDev,
+		initPeriod: a,
+		ma:         ma,
+		stdDev:     stdDev,
+		upNStdDev:  upNStdDev,
+		dnNStdDev:  dnNStdDev,
 	}
 }
 
@@ -37,6 +46,10 @@ func (b *BBands) Update(v float64) (float64, float64, float64) {
 	stddev := b.stdDev.Update(v)
 
 	return m + b.upNStdDev*stddev, m, m - b.upNStdDev*stddev
+}
+
+func (b *BBands) InitPeriod() int64 {
+	return b.initPeriod
 }
 
 // Developed by John Bollinger, Bollinger Bands are volatility

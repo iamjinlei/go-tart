@@ -51,6 +51,10 @@ func (a *Aroon) Update(h, l float64) (float64, float64) {
 	return a.aroonValue(minIdx), a.aroonValue(maxIdx)
 }
 
+func (a *Aroon) InitPeriod() int64 {
+	return a.n
+}
+
 // Developed by Tushar Chande in 1995, Aroon is an indicator
 // system that determines whether a stock is trending or not
 // and how strong the trend is. “Aroon” means “Dawn's Early Light”

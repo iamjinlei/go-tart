@@ -27,6 +27,10 @@ func (b *Bop) Update(o, h, l, c float64) float64 {
 	return (c - o) / d
 }
 
+func (b *Bop) InitPeriod() int64 {
+	return 0
+}
+
 // Balance of Power (BOP) is an oscillator that measures the
 // strength of buying and selling pressure. Introduced by Igor
 // Levshin in the August 2001 issue of Technical Analysis of

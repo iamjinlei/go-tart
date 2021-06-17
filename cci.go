@@ -16,16 +16,25 @@ package tart
 //  https://www.investopedia.com/terms/c/commoditychannelindex.asp
 //  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/cci
 type Cci struct {
-	n   int64
-	avg *Sma
-	dev *Dev
+	n          int64
+	initPeriod int64
+	avg        *Sma
+	dev        *Dev
 }
 
 func NewCci(n int64) *Cci {
+	avg := NewSma(n)
+	dev := NewDev(n)
+	a := avg.InitPeriod()
+	b := dev.InitPeriod()
+	if a < b {
+		a = b
+	}
 	return &Cci{
-		n:   n,
-		avg: NewSma(n),
-		dev: NewDev(n),
+		n:          n,
+		initPeriod: a,
+		avg:        avg,
+		dev:        dev,
 	}
 }
 
@@ -39,6 +48,10 @@ func (d *Cci) Update(h, l, c float64) float64 {
 	}
 
 	return (m - avg) / (0.015 * dev)
+}
+
+func (d *Cci) InitPeriod() int64 {
+	return d.initPeriod
 }
 
 // Developed by Donald Lambert and featured in Commodities

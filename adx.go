@@ -47,13 +47,18 @@ func NewAdx(n int64) *Adx {
 }
 
 func (a *Adx) Update(h, l, c float64) float64 {
-	dx := a.dx.Update(h, l, c)
 	a.sz++
+	dx := a.dx.Update(h, l, c)
+
 	if a.sz <= a.n {
 		return 0
 	}
 
 	return a.adx.Update(dx)
+}
+
+func (a *Adx) InitPeriod() int64 {
+	return a.n
 }
 
 // The Average Directional Index (ADX), Minus Directional

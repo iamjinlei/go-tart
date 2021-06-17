@@ -60,6 +60,10 @@ func (m *Mfi) Update(h, l, c, v float64) float64 {
 	return pSum / sum * 100.0
 }
 
+func (m *Mfi) InitPeriod() int64 {
+	return m.n
+}
+
 // The Money Flow Index (MFI) is an oscillator that uses
 // both price and volume to measure buying and selling
 // pressure. Created by Gene Quong and Avrum Soudack,

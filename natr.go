@@ -23,6 +23,10 @@ func (a *Natr) Update(h, l, c float64) float64 {
 	return tr / c * 100.0
 }
 
+func (a *Natr) InitPeriod() int64 {
+	return a.atr.InitPeriod()
+}
+
 // Normalized Average True Range (NATR) attempts to normalize
 // the average true range values across instruments by using
 // the closing price.

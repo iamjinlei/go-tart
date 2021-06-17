@@ -65,6 +65,10 @@ func (t *Trima) Update(v float64) float64 {
 	return t.sum * t.factor
 }
 
+func (t *Trima) InitPeriod() int64 {
+	return t.n - 1
+}
+
 // The triangular moving average (TMA) is a technical indicator that is similar
 // to other moving averages. The TMA shows the average (or mean) price of an
 // asset over a specified number of data points—usually a number of price bars.

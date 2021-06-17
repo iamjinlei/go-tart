@@ -36,6 +36,10 @@ func (a *Ad) Update(h, l, c, v float64) float64 {
 	return a.ad
 }
 
+func (a *Ad) InitPeriod() int64 {
+	return 0
+}
+
 // Developed by Marc Chaikin, the Accumulation Distribution
 // Line is a volume-based indicator designed to measure the
 // cumulative flow of money into and out of a security.

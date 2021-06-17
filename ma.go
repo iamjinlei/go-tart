@@ -49,6 +49,10 @@ func (m *Ma) Update(v float64) float64 {
 	return m.mu.Update(v)
 }
 
+func (m *Ma) InitPeriod() int64 {
+	return m.mu.InitPeriod()
+}
+
 // Convenient wrapper for different moving average types
 func MaArr(t MaType, in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
@@ -63,4 +67,5 @@ func MaArr(t MaType, in []float64, n int64) []float64 {
 
 type maUpdater interface {
 	Update(v float64) float64
+	InitPeriod() int64
 }

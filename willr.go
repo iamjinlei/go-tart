@@ -37,6 +37,10 @@ func (w *WillR) Update(h, l, c float64) float64 {
 	return k - 100.0
 }
 
+func (w *WillR) InitPeriod() int64 {
+	return w.n - 1
+}
+
 // Developed by Larry Williams, Williams %R is a momentum indicator that is
 // the inverse of the Fast Stochastic Oscillator. Also referred to as %R,
 // Williams %R reflects the level of the close relative to the highest high

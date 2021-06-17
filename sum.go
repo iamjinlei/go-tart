@@ -26,6 +26,10 @@ func (s *Sum) Update(v float64) float64 {
 	return s.sum
 }
 
+func (s *Sum) InitPeriod() int64 {
+	return s.n - 1
+}
+
 func SumArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 

@@ -41,6 +41,10 @@ func (e *Ema) Update(v float64) float64 {
 	return e.ma
 }
 
+func (e *Ema) InitPeriod() int64 {
+	return e.n - 1
+}
+
 // Exponential moving averages (EMAs) reduce the lag by
 // applying more weight to recent prices. The weighting
 // applied to the most recent price depends on the number

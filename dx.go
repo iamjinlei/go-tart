@@ -69,6 +69,10 @@ func (d *Dx) Update(h, l, c float64) float64 {
 	return dx
 }
 
+func (d *Dx) InitPeriod() int64 {
+	return d.n
+}
+
 // Refert o ADX.
 //  https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx
 func DxArr(h, l, c []float64, n int64) []float64 {
@@ -108,4 +112,8 @@ func (s *smooth) update(v float64) float64 {
 	}
 
 	return s.sm
+}
+
+func (s *smooth) initPeriod() int64 {
+	return s.n - 1
 }

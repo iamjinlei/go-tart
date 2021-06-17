@@ -9,21 +9,30 @@ package tart
 //  https://www.investopedia.com/terms/c/chandemomentumoscillator.asp
 //  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/cmo
 type Cmo struct {
-	n     int64
-	su    *Ema
-	sd    *Ema
-	prevC float64
-	sz    int64
+	n          int64
+	initPeriod int64
+	su         *Ema
+	sd         *Ema
+	prevC      float64
+	sz         int64
 }
 
 func NewCmo(n int64) *Cmo {
 	k := 1.0 / float64(n)
+	su := NewEma(n, k)
+	sd := NewEma(n, k)
+	a := su.InitPeriod()
+	b := sd.InitPeriod()
+	if a < b {
+		a = b
+	}
 	return &Cmo{
-		n:     n,
-		su:    NewEma(n, k),
-		sd:    NewEma(n, k),
-		prevC: 0,
-		sz:    0,
+		n:          n,
+		initPeriod: a,
+		su:         su,
+		sd:         sd,
+		prevC:      0,
+		sz:         0,
 	}
 }
 
@@ -51,6 +60,10 @@ func (c *Cmo) Update(v float64) float64 {
 	}
 
 	return (asu - asd) / sum * 100.0
+}
+
+func (c *Cmo) InitPeriod() int64 {
+	return c.initPeriod
 }
 
 // The Chande momentum oscillator is a technical momentum

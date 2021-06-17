@@ -49,6 +49,10 @@ func (t *Tema) Update(v float64) float64 {
 	return 0
 }
 
+func (t *Tema) InitPeriod() int64 {
+	return t.n*3 - 3
+}
+
 // The Triple Exponential Moving Average (TEMA) reduces the lag of traditional
 // EMAs, making it more responsive and better-suited for short-term trading.
 // Shortly after developing the Double Exponential Moving Average (DEMA) in 1994,

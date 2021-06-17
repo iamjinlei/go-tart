@@ -49,6 +49,10 @@ func (p *Ppo) Update(v float64) float64 {
 	return (fast - slow) / slow * 100.0
 }
 
+func (p *Ppo) InitPeriod() int64 {
+	return p.slowN - 1
+}
+
 // The Percentage Price Oscillator (PPO) is a momentum oscillator
 // that measures the difference between two moving averages as a
 // percentage of the larger moving average. As with its cousin,

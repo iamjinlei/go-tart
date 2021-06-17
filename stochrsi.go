@@ -36,8 +36,8 @@ func NewStochRsi(n int64, kN int64, dt MaType, dN int64) *StochRsi {
 }
 
 func (s *StochRsi) Update(v float64) (float64, float64) {
-	rsi := s.rsi.Update(v)
 	s.sz++
+	rsi := s.rsi.Update(v)
 
 	if s.sz <= s.n {
 		return 0, 0
@@ -48,6 +48,10 @@ func (s *StochRsi) Update(v float64) (float64, float64) {
 	}
 
 	return k, d
+}
+
+func (s *StochRsi) InitPeriod() int64 {
+	return s.util - 1
 }
 
 // Developed by Tushar Chande and Stanley Kroll, StochRSI is an oscillator that

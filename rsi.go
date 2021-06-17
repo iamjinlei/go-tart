@@ -68,6 +68,10 @@ func (r *Rsi) Update(v float64) float64 {
 	return up / sum * 100.0
 }
 
+func (r *Rsi) InitPeriod() int64 {
+	return r.n
+}
+
 // Developed by J. Welles Wilder, the Relative Strength Index (RSI) is a momentum
 // oscillator that measures the speed and change of price movements. RSI oscillates
 // between zero and 100. According to Wilder, RSI is considered overbought when

@@ -48,6 +48,10 @@ func (s *StochFast) Update(h, l, c float64) (float64, float64) {
 	return k, d
 }
 
+func (s *StochFast) InitPeriod() int64 {
+	return s.kN + s.dN - 2
+}
+
 // Developed by George C. Lane in the late 1950s, the Stochastic Oscillator is
 // a momentum indicator that shows the location of the close relative to the
 // high-low range over a set number of periods. According to an interview with
