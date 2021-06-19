@@ -49,6 +49,10 @@ func (w *Wma) InitPeriod() int64 {
 	return w.n - 1
 }
 
+func (w *Wma) Valid() bool {
+	return w.hist.size() > w.InitPeriod()
+}
+
 // A Weighted Moving Average puts more weight on recent data and less on past
 // data. This is done by multiplying each bar’s price by a weighting factor.
 // Because of its unique calculation, WMA will follow prices more closely

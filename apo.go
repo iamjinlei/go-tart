@@ -26,6 +26,7 @@ func NewApo(t MaType, fastN, slowN int64) *Apo {
 
 func (a *Apo) Update(v float64) float64 {
 	a.sz++
+
 	fast := a.fastMa.Update(v)
 	slow := a.slowMa.Update(v)
 
@@ -38,6 +39,10 @@ func (a *Apo) Update(v float64) float64 {
 
 func (a *Apo) InitPeriod() int64 {
 	return a.slowN - 1
+}
+
+func (a *Apo) Valid() bool {
+	return a.sz > a.InitPeriod()
 }
 
 // The Absolute Price Oscillator displays the difference

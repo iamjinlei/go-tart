@@ -34,6 +34,10 @@ func (a *AroonOsc) InitPeriod() int64 {
 	return a.aroon.InitPeriod()
 }
 
+func (a *AroonOsc) Valid() bool {
+	return a.aroon.Valid()
+}
+
 // The Aroon Oscillator is the difference between Aroon-Up
 // and Aroon-Down. These two indicators are usually plotted
 // together for easy comparison, but chartists can also view

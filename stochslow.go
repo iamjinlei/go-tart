@@ -33,6 +33,7 @@ func NewStochSlow(fastKN int64, kt MaType, slowKN int64, dt MaType, slowDN int64
 
 func (s *StochSlow) Update(h, l, c float64) (float64, float64) {
 	s.sz++
+
 	fastK := s.stochK.Update(h, l, c)
 
 	if s.sz < s.fastKN {
@@ -50,6 +51,10 @@ func (s *StochSlow) Update(h, l, c float64) (float64, float64) {
 
 func (s *StochSlow) InitPeriod() int64 {
 	return s.util - 1
+}
+
+func (s *StochSlow) Valid() bool {
+	return s.sz > s.InitPeriod()
 }
 
 // The Slow Stochastic Oscillator is a momentum indicator that shows the location

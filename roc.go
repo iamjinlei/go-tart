@@ -30,9 +30,10 @@ func NewRoc(n int64) *Roc {
 }
 
 func (r *Roc) Update(v float64) float64 {
+	r.sz++
+
 	old := r.hist.append(v)
 
-	r.sz++
 	if r.sz <= r.n {
 		return 0
 	}
@@ -45,6 +46,10 @@ func (r *Roc) Update(v float64) float64 {
 
 func (r *Roc) InitPeriod() int64 {
 	return r.n
+}
+
+func (r *Roc) Valid() bool {
+	return r.sz > r.InitPeriod()
 }
 
 // The Rate-of-Change (ROC) indicator, which is also referred to as simply

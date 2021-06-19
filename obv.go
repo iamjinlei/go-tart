@@ -49,6 +49,10 @@ func (o *Obv) InitPeriod() int64 {
 	return 0
 }
 
+func (o *Obv) Valid() bool {
+	return true
+}
+
 // On Balance Volume (OBV) measures buying and selling
 // pressure as a cumulative indicator, adding volume on
 // up days and subtracting it on down days. OBV was

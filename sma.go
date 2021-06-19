@@ -27,10 +27,11 @@ func NewSma(n int64) *Sma {
 }
 
 func (s *Sma) Update(v float64) float64 {
+	s.sz++
+
 	old := s.hist.append(v)
 	s.sum += v - old
 
-	s.sz++
 	if s.sz < s.n {
 		return 0
 	}
@@ -40,6 +41,10 @@ func (s *Sma) Update(v float64) float64 {
 
 func (s *Sma) InitPeriod() int64 {
 	return s.n - 1
+}
+
+func (s *Sma) Valid() bool {
+	return s.sz > s.InitPeriod()
 }
 
 // A simple moving average is formed by computing the average price of a security

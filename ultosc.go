@@ -86,6 +86,10 @@ func (u *UltOsc) InitPeriod() int64 {
 	return u.n3
 }
 
+func (u *UltOsc) Valid() bool {
+	return u.sz > u.InitPeriod()
+}
+
 // Developed by Larry Williams in 1976 and featured in Stocks & Commodities
 // Magazine in 1985, the Ultimate Oscillator is a momentum oscillator designed
 // to capture momentum across three different timeframes. The multiple timeframe

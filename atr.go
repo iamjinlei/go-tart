@@ -38,8 +38,10 @@ func NewAtr(n int64) *Atr {
 }
 
 func (a *Atr) Update(h, l, c float64) float64 {
-	tr := a.tr.Update(h, l, c)
 	a.sz++
+
+	tr := a.tr.Update(h, l, c)
+
 	if a.sz == 1 {
 		return 0
 	}
@@ -49,6 +51,10 @@ func (a *Atr) Update(h, l, c float64) float64 {
 
 func (a *Atr) InitPeriod() int64 {
 	return 1
+}
+
+func (a *Atr) Valid() bool {
+	return a.sz > 1
 }
 
 // Developed by J. Welles Wilder, the Average True Range (ATR)

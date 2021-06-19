@@ -39,9 +39,10 @@ func NewRsi(n int64) *Rsi {
 }
 
 func (r *Rsi) Update(v float64) float64 {
+	r.sz++
+
 	chg := v - r.prevC
 	r.prevC = v
-	r.sz++
 
 	if r.sz == 1 {
 		return 0
@@ -70,6 +71,10 @@ func (r *Rsi) Update(v float64) float64 {
 
 func (r *Rsi) InitPeriod() int64 {
 	return r.n
+}
+
+func (r *Rsi) Valid() bool {
+	return r.sz > r.InitPeriod()
 }
 
 // Developed by J. Welles Wilder, the Relative Strength Index (RSI) is a momentum

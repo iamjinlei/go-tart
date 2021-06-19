@@ -31,8 +31,9 @@ func NewTema(n int64, k float64) *Tema {
 }
 
 func (t *Tema) Update(v float64) float64 {
-	e1 := t.ema1.Update(v)
 	t.sz++
+
+	e1 := t.ema1.Update(v)
 
 	if t.sz > t.n-1 {
 		e2 := t.ema2.Update(e1)
@@ -51,6 +52,10 @@ func (t *Tema) Update(v float64) float64 {
 
 func (t *Tema) InitPeriod() int64 {
 	return t.n*3 - 3
+}
+
+func (t *Tema) Valid() bool {
+	return t.sz > t.InitPeriod()
 }
 
 // The Triple Exponential Moving Average (TEMA) reduces the lag of traditional

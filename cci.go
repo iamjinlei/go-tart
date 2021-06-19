@@ -20,6 +20,7 @@ type Cci struct {
 	initPeriod int64
 	avg        *Sma
 	dev        *Dev
+	sz         int64
 }
 
 func NewCci(n int64) *Cci {
@@ -35,10 +36,13 @@ func NewCci(n int64) *Cci {
 		initPeriod: a,
 		avg:        avg,
 		dev:        dev,
+		sz:         0,
 	}
 }
 
 func (d *Cci) Update(h, l, c float64) float64 {
+	d.sz++
+
 	m := (h + l + c) / 3.0
 	avg := d.avg.Update(m)
 	dev := d.dev.Update(m)
@@ -52,6 +56,10 @@ func (d *Cci) Update(h, l, c float64) float64 {
 
 func (d *Cci) InitPeriod() int64 {
 	return d.initPeriod
+}
+
+func (d *Cci) Valid() bool {
+	return d.sz > d.initPeriod
 }
 
 // Developed by Donald Lambert and featured in Commodities

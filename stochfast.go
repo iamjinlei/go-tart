@@ -33,8 +33,9 @@ func NewStochFast(kN int64, dt MaType, dN int64) *StochFast {
 }
 
 func (s *StochFast) Update(h, l, c float64) (float64, float64) {
-	k := s.stochK.Update(h, l, c)
 	s.sz++
+
+	k := s.stochK.Update(h, l, c)
 
 	if s.sz < s.kN {
 		return 0, 0
@@ -50,6 +51,10 @@ func (s *StochFast) Update(h, l, c float64) (float64, float64) {
 
 func (s *StochFast) InitPeriod() int64 {
 	return s.kN + s.dN - 2
+}
+
+func (s *StochFast) Valid() bool {
+	return s.sz > s.InitPeriod()
 }
 
 // Developed by George C. Lane in the late 1950s, the Stochastic Oscillator is

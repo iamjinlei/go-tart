@@ -40,9 +40,10 @@ func (a *Aroon) aroonValue(idx int64) float64 {
 }
 
 func (a *Aroon) Update(h, l float64) (float64, float64) {
+	a.sz++
+
 	minIdx, _ := a.min.Update(l)
 	maxIdx, _ := a.max.Update(h)
-	a.sz++
 
 	if a.sz <= a.n {
 		return 0, 0
@@ -53,6 +54,10 @@ func (a *Aroon) Update(h, l float64) (float64, float64) {
 
 func (a *Aroon) InitPeriod() int64 {
 	return a.n
+}
+
+func (a *Aroon) Valid() bool {
+	return a.sz > a.InitPeriod()
 }
 
 // Developed by Tushar Chande in 1995, Aroon is an indicator

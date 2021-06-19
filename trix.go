@@ -34,6 +34,7 @@ func NewTrix(n int64) *Trix {
 
 func (t *Trix) Update(v float64) float64 {
 	t.sz++
+
 	v = t.ema1.Update(v)
 	if t.sz < t.n {
 		return 0
@@ -59,6 +60,10 @@ func (t *Trix) Update(v float64) float64 {
 
 func (t *Trix) InitPeriod() int64 {
 	return 3*t.n - 3
+}
+
+func (t *Trix) Valid() bool {
+	return t.sz > t.InitPeriod()
 }
 
 // TRIX is a momentum oscillator that displays the percent rate of change of

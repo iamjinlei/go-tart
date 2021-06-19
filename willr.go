@@ -29,6 +29,7 @@ func NewWillR(n int64) *WillR {
 
 func (w *WillR) Update(h, l, c float64) float64 {
 	w.sz++
+
 	k := w.stoch.Update(h, l, c)
 
 	if w.sz < w.n {
@@ -39,6 +40,10 @@ func (w *WillR) Update(h, l, c float64) float64 {
 
 func (w *WillR) InitPeriod() int64 {
 	return w.n - 1
+}
+
+func (w *WillR) Valid() bool {
+	return w.sz > w.InitPeriod()
 }
 
 // Developed by Larry Williams, Williams %R is a momentum indicator that is

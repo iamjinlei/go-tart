@@ -44,6 +44,10 @@ func (r *Var) InitPeriod() int64 {
 	return r.n - 1
 }
 
+func (r *Var) Valid() bool {
+	return r.hist.size() > r.InitPeriod()
+}
+
 // The term variance refers to a statistical measurement of the spread between
 // numbers in a data set. More specifically, variance measures how far each
 // number in the set is from the mean and thus from every other number in the

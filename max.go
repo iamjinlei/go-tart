@@ -39,6 +39,10 @@ func (m *Max) InitPeriod() int64 {
 	return m.n - 1
 }
 
+func (m *Max) Valid() bool {
+	return m.hist.size() > m.InitPeriod()
+}
+
 // Max value of the selected period.
 func MaxArr(in []float64, n int64) ([]int64, []float64) {
 	outIdx := make([]int64, len(in))

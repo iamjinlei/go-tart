@@ -29,6 +29,7 @@ func NewEma(n int64, k float64) *Ema {
 
 func (e *Ema) Update(v float64) float64 {
 	e.sz++
+
 	if e.sz <= e.n {
 		e.ma += v / float64(e.n)
 		if e.sz < e.n {
@@ -43,6 +44,10 @@ func (e *Ema) Update(v float64) float64 {
 
 func (e *Ema) InitPeriod() int64 {
 	return e.n - 1
+}
+
+func (e *Ema) Valid() bool {
+	return e.sz > e.InitPeriod()
 }
 
 // Exponential moving averages (EMAs) reduce the lag by

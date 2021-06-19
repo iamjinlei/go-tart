@@ -35,10 +35,11 @@ func NewPpo(t MaType, fastN, slowN int64) *Ppo {
 }
 
 func (p *Ppo) Update(v float64) float64 {
+	p.sz++
+
 	fast := p.fast.Update(v)
 	slow := p.slow.Update(v)
 
-	p.sz++
 	if p.sz < p.slowN {
 		return 0
 	}
@@ -51,6 +52,10 @@ func (p *Ppo) Update(v float64) float64 {
 
 func (p *Ppo) InitPeriod() int64 {
 	return p.slowN - 1
+}
+
+func (p *Ppo) Valid() bool {
+	return p.sz > p.InitPeriod()
 }
 
 // The Percentage Price Oscillator (PPO) is a momentum oscillator

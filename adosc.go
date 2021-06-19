@@ -48,6 +48,7 @@ func NewAdOsc(fastN, slowN int64) *AdOsc {
 
 func (a *AdOsc) Update(h, l, c, v float64) float64 {
 	a.sz++
+
 	ad := a.ad.Update(h, l, c, v)
 	if a.sz == 1 {
 		a.fast = ad
@@ -65,6 +66,10 @@ func (a *AdOsc) Update(h, l, c, v float64) float64 {
 
 func (a *AdOsc) InitPeriod() int64 {
 	return a.slowN - 1
+}
+
+func (a *AdOsc) Valid() bool {
+	return a.sz > a.InitPeriod()
 }
 
 // Developed by Marc Chaikin, the Chaikin Oscillator measures the

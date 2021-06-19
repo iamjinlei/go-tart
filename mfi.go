@@ -34,10 +34,11 @@ func NewMfi(n int64) *Mfi {
 }
 
 func (m *Mfi) Update(h, l, c, v float64) float64 {
+	m.sz++
+
 	tp := (h + l + c) / 3.0
 	prevTp := m.prevTp
 	m.prevTp = tp
-	m.sz++
 
 	if m.sz == 1 {
 		return 0
@@ -62,6 +63,10 @@ func (m *Mfi) Update(h, l, c, v float64) float64 {
 
 func (m *Mfi) InitPeriod() int64 {
 	return m.n
+}
+
+func (m *Mfi) Valid() bool {
+	return m.sz > m.InitPeriod()
 }
 
 // The Money Flow Index (MFI) is an oscillator that uses

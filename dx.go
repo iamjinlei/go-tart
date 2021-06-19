@@ -31,13 +31,14 @@ func NewDx(n int64) *Dx {
 }
 
 func (d *Dx) Update(h, l, c float64) float64 {
+	d.sz++
+
 	tr := d.tr.Update(h, l, c)
 	plusDm := h - d.prevH
 	minusDm := d.prevL - l
 	d.prevH = h
 	d.prevL = l
 
-	d.sz++
 	if d.sz == 1 {
 		return 0
 	}
@@ -71,6 +72,10 @@ func (d *Dx) Update(h, l, c float64) float64 {
 
 func (d *Dx) InitPeriod() int64 {
 	return d.n
+}
+
+func (d *Dx) Valid() bool {
+	return d.sz > d.InitPeriod()
 }
 
 // Refer to ADX.

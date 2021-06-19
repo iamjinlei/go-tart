@@ -37,9 +37,10 @@ func NewCmo(n int64) *Cmo {
 }
 
 func (c *Cmo) Update(v float64) float64 {
+	c.sz++
+
 	d := v - c.prevC
 	c.prevC = v
-	c.sz++
 
 	if c.sz == 1 {
 		return 0
@@ -64,6 +65,10 @@ func (c *Cmo) Update(v float64) float64 {
 
 func (c *Cmo) InitPeriod() int64 {
 	return c.initPeriod
+}
+
+func (c *Cmo) Valid() bool {
+	return c.sz > c.initPeriod
 }
 
 // The Chande momentum oscillator is a technical momentum

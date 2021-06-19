@@ -21,6 +21,7 @@ type BBands struct {
 	stdDev     *StdDev
 	upNStdDev  float64
 	dnNStdDev  float64
+	sz         int64
 }
 
 func NewBBands(t MaType, n int64, upNStdDev, dnNStdDev float64) *BBands {
@@ -37,11 +38,14 @@ func NewBBands(t MaType, n int64, upNStdDev, dnNStdDev float64) *BBands {
 		stdDev:     stdDev,
 		upNStdDev:  upNStdDev,
 		dnNStdDev:  dnNStdDev,
+		sz:         0,
 	}
 }
 
 // upper, middle, lower
 func (b *BBands) Update(v float64) (float64, float64, float64) {
+	b.sz++
+
 	m := b.ma.Update(v)
 	stddev := b.stdDev.Update(v)
 
@@ -50,6 +54,10 @@ func (b *BBands) Update(v float64) (float64, float64, float64) {
 
 func (b *BBands) InitPeriod() int64 {
 	return b.initPeriod
+}
+
+func (b *BBands) Valid() bool {
+	return b.sz > b.initPeriod
 }
 
 // Developed by John Bollinger, Bollinger Bands are volatility

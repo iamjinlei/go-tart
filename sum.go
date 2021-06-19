@@ -30,6 +30,10 @@ func (s *Sum) InitPeriod() int64 {
 	return s.n - 1
 }
 
+func (s *Sum) Valid() bool {
+	return s.hist.size() > s.InitPeriod()
+}
+
 func SumArr(in []float64, n int64) []float64 {
 	out := make([]float64, len(in))
 
