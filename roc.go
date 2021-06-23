@@ -17,14 +17,14 @@ package tart
 //  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/roc
 type Roc struct {
 	n    int64
-	hist *cBuf
+	hist *CBuf
 	sz   int64
 }
 
 func NewRoc(n int64) *Roc {
 	return &Roc{
 		n:    n,
-		hist: newCBuf(n),
+		hist: NewCBuf(n),
 		sz:   0,
 	}
 }
@@ -32,7 +32,7 @@ func NewRoc(n int64) *Roc {
 func (r *Roc) Update(v float64) float64 {
 	r.sz++
 
-	old := r.hist.append(v)
+	old := r.hist.Append(v)
 
 	if r.sz <= r.n {
 		return 0

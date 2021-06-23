@@ -1,7 +1,7 @@
 package tart
 
 // circular buffer maintaining fixed sized history
-type cBuf struct {
+type CBuf struct {
 	n      int64
 	hist   []float64
 	oldest int64
@@ -9,8 +9,8 @@ type cBuf struct {
 	sz     int64
 }
 
-func newCBuf(n int64) *cBuf {
-	return &cBuf{
+func NewCBuf(n int64) *CBuf {
+	return &CBuf{
 		n:      n,
 		hist:   make([]float64, n),
 		oldest: 0,
@@ -18,7 +18,8 @@ func newCBuf(n int64) *cBuf {
 	}
 }
 
-func (c *cBuf) append(v float64) float64 {
+// Append latest value and return oldest one
+func (c *CBuf) Append(v float64) float64 {
 	old := c.hist[c.oldest]
 	c.hist[c.oldest] = v
 	c.newest = c.oldest
@@ -27,11 +28,13 @@ func (c *cBuf) append(v float64) float64 {
 	return old
 }
 
-func (c *cBuf) size() int64 {
+// Number of values appended
+func (c *CBuf) Size() int64 {
 	return c.sz
 }
 
-func (c *cBuf) indexToSeq(idx int64) int64 {
+// From circular buf position to total sequence index
+func (c *CBuf) IndexToSeq(idx int64) int64 {
 	if idx < c.oldest {
 		return c.sz - (c.oldest - idx)
 	} else {
@@ -39,27 +42,30 @@ func (c *cBuf) indexToSeq(idx int64) int64 {
 	}
 }
 
-func (c *cBuf) newestIndex() int64 {
+// Index of the latest value
+func (c *CBuf) NewestIndex() int64 {
 	return c.newest
 }
 
-func (c *cBuf) oldestIndex() int64 {
+// Index of the oldest value
+func (c *CBuf) OldestIndex() int64 {
 	return c.oldest
 }
 
 // nthNewest(0) = newest
 // nthNewest(1) = 2nd newest
-func (c *cBuf) nthNewest(offset int64) float64 {
+func (c *CBuf) NthNewest(offset int64) float64 {
 	return c.hist[(c.newest+c.n-offset)%c.n]
 }
 
 // nthOldest(0) = oldest
 // nthOldest(1) = 2nd oldest
-func (c *cBuf) nthOldest(offset int64) float64 {
+func (c *CBuf) NthOldest(offset int64) float64 {
 	return c.hist[(c.oldest+offset)%c.n]
 }
 
-func (c *cBuf) min() (int64, float64) {
+// Min value in buf
+func (c *CBuf) Min() (int64, float64) {
 	min := c.hist[0]
 	minIdx := int64(0)
 	for i := 1; i < len(c.hist); i++ {
@@ -71,7 +77,8 @@ func (c *cBuf) min() (int64, float64) {
 	return minIdx, min
 }
 
-func (c *cBuf) max() (int64, float64) {
+// Max value in buf
+func (c *CBuf) Max() (int64, float64) {
 	max := c.hist[0]
 	maxIdx := int64(0)
 	for i := 1; i < len(c.hist); i++ {
@@ -83,7 +90,8 @@ func (c *cBuf) max() (int64, float64) {
 	return maxIdx, max
 }
 
-func (c *cBuf) iter(fn func(v float64)) {
+// Iterate through buf elements and call function for each
+func (c *CBuf) Iter(fn func(v float64)) {
 	idx := c.oldest
 	for i := int64(0); i < c.n; i++ {
 		fn(c.hist[idx])

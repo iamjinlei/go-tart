@@ -12,7 +12,7 @@ package tart
 //  https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/sma
 type Sma struct {
 	n    int64
-	hist *cBuf
+	hist *CBuf
 	sz   int64
 	sum  float64
 }
@@ -20,7 +20,7 @@ type Sma struct {
 func NewSma(n int64) *Sma {
 	return &Sma{
 		n:    n,
-		hist: newCBuf(n),
+		hist: NewCBuf(n),
 		sz:   0,
 		sum:  0,
 	}
@@ -29,7 +29,7 @@ func NewSma(n int64) *Sma {
 func (s *Sma) Update(v float64) float64 {
 	s.sz++
 
-	old := s.hist.append(v)
+	old := s.hist.Append(v)
 	s.sum += v - old
 
 	if s.sz < s.n {

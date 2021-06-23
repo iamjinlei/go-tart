@@ -3,7 +3,7 @@ package tart
 // Min value of the selected period.
 type Min struct {
 	n      int64
-	hist   *cBuf
+	hist   *CBuf
 	min    float64
 	minIdx int64
 }
@@ -11,28 +11,28 @@ type Min struct {
 func NewMin(n int64) *Min {
 	return &Min{
 		n:      n,
-		hist:   newCBuf(n),
+		hist:   NewCBuf(n),
 		min:    0,
 		minIdx: 0,
 	}
 }
 
 func (m *Min) Update(v float64) (int64, float64) {
-	m.hist.append(v)
+	m.hist.Append(v)
 
-	if m.hist.size() < m.n {
+	if m.hist.Size() < m.n {
 		return 0, 0
 	}
 
-	if m.hist.size() == m.n || m.minIdx == m.hist.newestIndex() {
-		m.minIdx, m.min = m.hist.min()
+	if m.hist.Size() == m.n || m.minIdx == m.hist.NewestIndex() {
+		m.minIdx, m.min = m.hist.Min()
 	} else if m.min >= v {
 		// conforming to TA-Lib which updates minIdx on equality
 		m.min = v
-		m.minIdx = m.hist.newestIndex()
+		m.minIdx = m.hist.NewestIndex()
 	}
 
-	return m.hist.indexToSeq(m.minIdx), m.min
+	return m.hist.IndexToSeq(m.minIdx), m.min
 }
 
 func (m *Min) InitPeriod() int64 {
@@ -40,7 +40,7 @@ func (m *Min) InitPeriod() int64 {
 }
 
 func (m *Min) Valid() bool {
-	return m.hist.size() > m.InitPeriod()
+	return m.hist.Size() > m.InitPeriod()
 }
 
 // Min value of the selected period.

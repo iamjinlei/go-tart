@@ -9,14 +9,14 @@ package tart
 // their point values.
 type Diff struct {
 	n    int64
-	hist *cBuf
+	hist *CBuf
 	sz   int64
 }
 
 func NewDiff(n int64) *Diff {
 	return &Diff{
 		n:    n,
-		hist: newCBuf(n),
+		hist: NewCBuf(n),
 		sz:   0,
 	}
 }
@@ -24,7 +24,7 @@ func NewDiff(n int64) *Diff {
 func (d *Diff) Update(v float64) float64 {
 	d.sz++
 
-	old := d.hist.append(v)
+	old := d.hist.Append(v)
 
 	if d.sz <= d.n {
 		return 0

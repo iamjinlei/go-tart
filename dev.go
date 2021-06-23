@@ -7,29 +7,29 @@ import (
 // Average deviation from mean value.
 type Dev struct {
 	n    int64
-	hist *cBuf
+	hist *CBuf
 	sum  float64
 }
 
 func NewDev(n int64) *Dev {
 	return &Dev{
 		n:    n,
-		hist: newCBuf(n),
+		hist: NewCBuf(n),
 		sum:  0,
 	}
 }
 
 func (d *Dev) Update(v float64) float64 {
-	old := d.hist.append(v)
+	old := d.hist.Append(v)
 	d.sum += v - old
 
-	if d.hist.size() < d.n {
+	if d.hist.Size() < d.n {
 		return 0
 	}
 
 	mean := d.sum / float64(d.n)
 	sum := float64(0)
-	d.hist.iter(func(v float64) {
+	d.hist.Iter(func(v float64) {
 		sum += math.Abs(v - mean)
 	})
 

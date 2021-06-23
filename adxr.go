@@ -6,22 +6,22 @@ package tart
 type AdxR struct {
 	n    int64
 	adx  *Adx
-	hist *cBuf
+	hist *CBuf
 }
 
 func NewAdxR(n int64) *AdxR {
 	return &AdxR{
 		n:    n,
 		adx:  NewAdx(n),
-		hist: newCBuf(n - 1),
+		hist: NewCBuf(n - 1),
 	}
 }
 
 func (a *AdxR) Update(h, l, c float64) float64 {
 	v := a.adx.Update(h, l, c)
-	old := a.hist.append(v)
+	old := a.hist.Append(v)
 
-	if a.hist.size() <= 3*a.n-2 {
+	if a.hist.Size() <= 3*a.n-2 {
 		return 0
 	}
 
@@ -33,7 +33,7 @@ func (a *AdxR) InitPeriod() int64 {
 }
 
 func (a *AdxR) Valid() bool {
-	return a.hist.size() > a.InitPeriod()
+	return a.hist.Size() > a.InitPeriod()
 }
 
 // Average Directional Movement Index Rating (ADXR) is a simple

@@ -10,29 +10,29 @@ package tart
 //  https://www.investopedia.com/terms/v/variance.asp
 type Var struct {
 	n    int64
-	hist *cBuf
+	hist *CBuf
 	sum  float64
 }
 
 func NewVar(n int64) *Var {
 	return &Var{
 		n:    n,
-		hist: newCBuf(n),
+		hist: NewCBuf(n),
 		sum:  0,
 	}
 }
 
 func (r *Var) Update(v float64) float64 {
-	old := r.hist.append(v)
+	old := r.hist.Append(v)
 	r.sum += v - old
 
-	if r.hist.size() < r.n {
+	if r.hist.Size() < r.n {
 		return 0
 	}
 
 	mean := r.sum / float64(r.n)
 	sum := float64(0)
-	r.hist.iter(func(v float64) {
+	r.hist.Iter(func(v float64) {
 		diff := (v - mean)
 		sum += diff * diff
 	})
@@ -45,7 +45,7 @@ func (r *Var) InitPeriod() int64 {
 }
 
 func (r *Var) Valid() bool {
-	return r.hist.size() > r.InitPeriod()
+	return r.hist.Size() > r.InitPeriod()
 }
 
 // The term variance refers to a statistical measurement of the spread between

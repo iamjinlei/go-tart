@@ -8,7 +8,7 @@ package tart
 type Wma struct {
 	n    int64
 	d    float64
-	hist *cBuf
+	hist *CBuf
 	sum  float64
 	wsum float64
 }
@@ -17,7 +17,7 @@ func NewWma(n int64) *Wma {
 	return &Wma{
 		n:    n,
 		d:    float64(n*(n+1)) / 2,
-		hist: newCBuf(n),
+		hist: NewCBuf(n),
 		sum:  0,
 		wsum: 0,
 	}
@@ -28,10 +28,10 @@ func (w *Wma) Update(v float64) float64 {
 		return v
 	}
 
-	old := w.hist.append(v)
+	old := w.hist.Append(v)
 	w.sum += v - old
 
-	sz := w.hist.size()
+	sz := w.hist.Size()
 	if sz < w.n {
 		w.wsum += v * float64(sz)
 		return 0
@@ -50,7 +50,7 @@ func (w *Wma) InitPeriod() int64 {
 }
 
 func (w *Wma) Valid() bool {
-	return w.hist.size() > w.InitPeriod()
+	return w.hist.Size() > w.InitPeriod()
 }
 
 // A Weighted Moving Average puts more weight on recent data and less on past

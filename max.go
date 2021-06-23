@@ -3,7 +3,7 @@ package tart
 // Max value of the selected period.
 type Max struct {
 	n      int64
-	hist   *cBuf
+	hist   *CBuf
 	max    float64
 	maxIdx int64
 }
@@ -11,28 +11,28 @@ type Max struct {
 func NewMax(n int64) *Max {
 	return &Max{
 		n:      n,
-		hist:   newCBuf(n),
+		hist:   NewCBuf(n),
 		max:    0,
 		maxIdx: 0,
 	}
 }
 
 func (m *Max) Update(v float64) (int64, float64) {
-	m.hist.append(v)
+	m.hist.Append(v)
 
-	if m.hist.size() < m.n {
+	if m.hist.Size() < m.n {
 		return 0, 0
 	}
 
-	if m.hist.size() == m.n || m.maxIdx == m.hist.newestIndex() {
-		m.maxIdx, m.max = m.hist.max()
+	if m.hist.Size() == m.n || m.maxIdx == m.hist.NewestIndex() {
+		m.maxIdx, m.max = m.hist.Max()
 	} else if m.max <= v {
 		// conforming to TA-Lib which updates maxIdx on equality
 		m.max = v
-		m.maxIdx = m.hist.newestIndex()
+		m.maxIdx = m.hist.NewestIndex()
 	}
 
-	return m.hist.indexToSeq(m.maxIdx), m.max
+	return m.hist.IndexToSeq(m.maxIdx), m.max
 }
 
 func (m *Max) InitPeriod() int64 {
@@ -40,7 +40,7 @@ func (m *Max) InitPeriod() int64 {
 }
 
 func (m *Max) Valid() bool {
-	return m.hist.size() > m.InitPeriod()
+	return m.hist.Size() > m.InitPeriod()
 }
 
 // Max value of the selected period.

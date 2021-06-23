@@ -3,23 +3,23 @@ package tart
 // Sum of the last N values.
 type Sum struct {
 	n    int64
-	hist *cBuf
+	hist *CBuf
 	sum  float64
 }
 
 func NewSum(n int64) *Sum {
 	return &Sum{
 		n:    n,
-		hist: newCBuf(n),
+		hist: NewCBuf(n),
 		sum:  0,
 	}
 }
 
 func (s *Sum) Update(v float64) float64 {
-	old := s.hist.append(v)
+	old := s.hist.Append(v)
 	s.sum += v - old
 
-	if s.hist.size() < s.n {
+	if s.hist.Size() < s.n {
 		return 0
 	}
 
@@ -31,7 +31,7 @@ func (s *Sum) InitPeriod() int64 {
 }
 
 func (s *Sum) Valid() bool {
-	return s.hist.size() > s.InitPeriod()
+	return s.hist.Size() > s.InitPeriod()
 }
 
 func SumArr(in []float64, n int64) []float64 {
